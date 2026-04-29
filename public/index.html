@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Tortiki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+  <a href="#" class="logo">Tortiki</a>
+
+  <nav class="nav">
+    <a href="#catalog">Каталог</a>
+    <a href="#order">Заказ</a>
+    <a href="#contacts">Контакты</a>
+    <button onclick="openProfile()" class="nav-btn">Профиль</button>
+    <button onclick="openCart()" class="cart-btn">Корзина <span id="cartCount">0</span></button>
+  </nav>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</header>
+
+<section class="mobile-menu" id="mobileMenu">
+  <a href="#catalog" onclick="toggleMenu()">Каталог</a>
+  <a href="#order" onclick="toggleMenu()">Заказ</a>
+  <a href="#contacts" onclick="toggleMenu()">Контакты</a>
+  <button onclick="openProfile()">Профиль</button>
+  <button onclick="openCart()">Корзина</button>
+</section>
+
+<section class="hero">
+  <div class="hero-img">
+    <img src="/images/heroimage.JPG" alt="Tortiki">
+  </div>
+
+  <div class="hero-content">
+    <p class="eyebrow">Кондитерская • кофейня • Талгар</p>
+    <h1>Свежие десерты для тёплых моментов.</h1>
+    <p class="hero-text">
+      Торты, бенто на заказ. Аккуратная упаковка,
+      нежный вкус и доставка по городу Талгар.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#catalog" class="btn dark">Смотреть каталог</a>
+      <a href="#order" class="btn light">Оформить заказ</a>
+    </div>
+  </div>
+</section>
+
+<section class="section intro">
+  <p class="eyebrow">Почему выбирают нас</p>
+  <h2>Десерты, которые выглядят красиво и запоминаются вкусом.</h2>
+
+  <div class="features">
+    <div>
+      <h3>На заказ</h3>
+      <p>Готовим торты под событие, стиль и пожелания клиента.</p>
+    </div>
+    <div>
+      <h3>Талгар</h3>
+      <p>Принимаем заказы по городу и рядом, обсуждаем удобное время.</p>
+    </div>
+    <div>
+      <h3>Свежесть</h3>
+      <p>Каждый десерт собирается аккуратно и с любовью.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="catalog">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Каталог</p>
+      <h2>Наши десерты</h2>
+    </div>
+
+    <div class="filters">
+      <button onclick="filterProducts('Все')" class="active">Все</button>
+      <button onclick="filterProducts('Торты')">Торты</button>
+      <button onclick="filterProducts('Бенто')">Бенто</button>
+      <button onclick="filterProducts('Круассаны')">Круассаны</button>
+    </div>
+  </div>
+
+  <div class="products" id="products"></div>
+</section>
+
+<section class="product-detail hidden" id="productDetail">
+  <div class="detail-image">
+    <img id="detailImage" src="" alt="">
+  </div>
+
+  <div class="detail-info">
+    <button class="back-btn" onclick="closeProductDetail()">← Назад в каталог</button>
+
+    <p class="label" id="detailBadge"></p>
+    <h2 id="detailName"></h2>
+    <p class="detail-price" id="detailPrice"></p>
+    <p class="detail-desc" id="detailDescription"></p>
+
+    <hr>
+
+    <h4>Состав</h4>
+    <p id="detailComposition"></p>
+
+    <h4 id="sizeTitle">Размер торта</h4>
+    <div class="size-grid" id="sizeOptions"></div>
+
+    <div id="cakeTextBlock">
+      <h4>Надпись на торте</h4>
+      <input class="clean-input" id="cakeText" maxlength="50" placeholder="Например: С днём рождения">
+    </div>
+
+    <h4>Количество</h4>
+    <div class="quantity">
+      <button onclick="changeQty(-1)">−</button>
+      <span id="qty">1</span>
+      <button onclick="changeQty(1)">+</button>
+    </div>
+
+    <button class="add-cart" onclick="addDetailToCart()">Добавить в корзину</button>
+  </div>
+</section>
+
+<section class="section order-section" id="order">
+  <div class="order-grid">
+    <div>
+      <p class="eyebrow">Оформление</p>
+      <h2>Заказ можно оформить прямо на сайте.</h2>
+      <p>
+        Выберите десерты и укажите параметры заказа - мы позаботимся об остальном.
+      </p>
+      <button onclick="openCart()" class="btn dark">Перейти к корзине</button>
+    </div>
+
+    <div class="custom-order-card">
+      <p class="eyebrow">Индивидуальный заказ</p>
+      <h2>Нужен торт по вашему дизайну?</h2>
+      <p>
+        Мы создаём десерты с индивидуальным оформлением - от бенто до праздничных тортов с уникальным дизайном, надписями и декором.
+Свяжитесь с нами в WhatsApp, и мы поможем подобрать идеальное решение для вашего события.
+      </p>
+      <a
+        class="whatsapp-btn"
+        href="https://wa.me/77473924574?text=Здравствуйте! Хочу оформить индивидуальный заказ в Tortiki."
+        target="_blank"
+      >
+        Написать в WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h2>Корзина</h2>
+    <button onclick="closeCart()">×</button>
+  </div>
+
+  <div id="cartItems"></div>
+
+  <div class="checkout">
+    <h3>Итого: <span id="cartTotal">0 ₸</span></h3>
+
+    <div id="guestFields">
+      <input id="guestName" placeholder="Ваше имя">
+      <input id="guestPhone" placeholder="Телефон">
+      <input id="guestEmail" placeholder="Email">
+    </div>
+
+    <label class="checkout-label">Способ получения</label>
+    <select id="delivery" onchange="toggleAddressField()">
+      <option value="Самовывоз">Самовывоз</option>
+      <option value="Доставка по Талгару">Доставка по Талгару</option>
+    </select>
+
+    <div id="pickupBox" class="pickup-box">
+      Самовывоз: ул. Лермонтова 37, Талгар
+    </div>
+
+    <label class="checkout-label">Дата</label>
+    <input id="orderDate" type="date">
+
+    <label class="checkout-label">Время</label>
+    <input id="orderTime" type="time">
+
+    <div id="addressBox" style="display: none;">
+      <label class="checkout-label">Адрес доставки</label>
+      <input id="address" placeholder="Улица, дом, квартира, подъезд, этаж">
+    </div>
+
+    <select id="payment">
+      <option value="Kaspi">Kaspi</option>
+      <option value="Наличными">Наличными</option>
+    </select>
+
+    <textarea id="comment" placeholder="Комментарий к заказу"></textarea>
+
+    <button onclick="submitOrder()" class="checkout-btn">Оформить заказ</button>
+  </div>
+</aside>
+
+<aside class="profile-drawer" id="profileDrawer">
+  <div class="drawer-head">
+    <h2>Профиль</h2>
+    <button onclick="closeProfile()">×</button>
+  </div>
+
+  <div id="profileContent">
+
+  
+  <div class="auth-box" id="loginBox">
+    <h3>Вход</h3>
+
+    <label>Email</label>
+    <input id="loginEmail" placeholder="Введите email">
+
+    <label>Пароль</label>
+    <div class="password-wrap">
+      <input id="loginPassword" type="password" placeholder="Введите пароль">
+      <span onclick="togglePassword('loginPassword')" class="show-btn">Показать</span>
+    </div>
+
+    <div class="auth-error" id="loginError"></div>
+
+    <button onclick="login()">Войти</button>
+
+    <p class="switch-link" onclick="showRegister()">Нет аккаунта? Зарегистрироваться</p>
+  </div>
+
+  
+  <div class="auth-box hidden" id="registerBox">
+    <h3>Регистрация</h3>
+
+    <label>Имя</label>
+    <input id="regName" placeholder="Введите имя">
+
+    <label>Телефон</label>
+    <input id="regPhone" placeholder="+7...">
+
+    <label>Email</label>
+    <input id="regEmail" placeholder="Введите email">
+
+    <label>Пароль</label>
+    <div class="password-wrap">
+      <input id="regPassword" type="password" placeholder="Введите пароль">
+      <span onclick="togglePassword('regPassword')" class="show-btn">Показать</span>
+    </div>
+
+    <div class="auth-error" id="regError"></div>
+
+    <button onclick="register()">Зарегистрироваться</button>
+
+    <p class="switch-link" onclick="showLogin()">Уже есть аккаунт? Войти</p>
+  </div>
+
+</div>
+</aside>
+
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toastIcon">✓</div>
+  <div>
+    <h4 id="toastTitle">Готово</h4>
+    <p id="toastText">Сообщение</p>
+  </div>
+</div>
+
+<footer class="site-footer" id="contacts">
+  <div class="footer-grid">
+
+    <div class="footer-col">
+      <h4>Tortiki</h4>
+      <a href="#catalog">Каталог</a>
+      <a href="#order">Оформить заказ</a>
+      <a href="#contacts">Контакты</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <p>Телефон: <a href="tel:+77473924574">+7 747 392 45 74</a></p>
+      <p>Instagram: <a href="https://instagram.com/tortiki.talgar" target="_blank">@tortiki.talgar</a></p>
+      <p>Город: Талгар</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Адрес и график</h4>
+      <p>Самовывоз: ул. Лермонтова 37, Талгар</p>
+      <p>Ежедневно: 09:00–23:00</p>
+      <p>Заказы желательно оформлять заранее.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Tortiki. Все права защищены.</p>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
